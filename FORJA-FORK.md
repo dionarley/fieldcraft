@@ -22,6 +22,10 @@ cd apps/fieldcraft
 cargo build --locked -p fieldcraft -p fieldcraft-cli
 ```
 
+O `rust-toolchain.toml` pina **Rust 1.99.1**: use rustup (é ele que instala a
+versão sozinho). O `rustc` do sistema nesta máquina é 1.96.1 e não compila o
+workspace. `pcbcraft` não tem `rust-toolchain.toml` e pede 1.95 ou mais novo.
+
 O agente fala com ele por MCP: `fieldcraft-cli mcp` roda sem janela;
 `fieldcraft --control 7070 &` mais `fieldcraft-cli mcp --connect 127.0.0.1:7070`
 prende a sessão ao app aberto, para a pessoa ver a análise enquanto acontece.
