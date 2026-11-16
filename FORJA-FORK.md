@@ -22,9 +22,17 @@ cd apps/fieldcraft
 cargo build --locked -p fieldcraft -p fieldcraft-cli
 ```
 
-O `rust-toolchain.toml` pina **Rust 1.99.1**: use rustup (é ele que instala a
-versão sozinho). O `rustc` do sistema nesta máquina é 1.96.1 e não compila o
-workspace. `pcbcraft` não tem `rust-toolchain.toml` e pede 1.95 ou mais novo.
+O `rust-toolchain.toml` pina **Rust 1.99.1**. Nesta máquina o `rustc` do sistema é
+1.96.1 (NixOS) e não compila o workspace: use a versão que o `mise` já tem
+(`~/.cargo/bin`, 1.99.1).
+
+```sh
+mise exec rust@1.99.1 -- cargo check -p fieldcraft-model --locked   # 2 min na primeira
+```
+
+`rust-toolchain.toml` só vale para rustup; como não há rustup aqui, o `mise`
+(ou `PATH="$HOME/.cargo/bin:$PATH"`) é o que seleciona a versão. `pcbcraft` não
+tem `rust-toolchain.toml` e compila com 1.95 ou mais novo.
 
 O agente fala com ele por MCP: `fieldcraft-cli mcp` roda sem janela;
 `fieldcraft --control 7070 &` mais `fieldcraft-cli mcp --connect 127.0.0.1:7070`
